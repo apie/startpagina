@@ -1,3 +1,5 @@
 todo.txt
 *.pyc
+settings.py
+*.sqlite
 
