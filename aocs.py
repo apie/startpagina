@@ -5,10 +5,10 @@ from sys import argv
 import urllib.request
 from lxml import html
 
+URL = "https://caspar.verhey.net/AoC/?year={year}"
 
 def get_open_days(username, year):
-    url = f"https://caspar.verhey.net/AoC/?year={year}"
-    response = urllib.request.urlopen(url)
+    response = urllib.request.urlopen(URL.format(year=year))
     r = response.read()
     h = html.fromstring(r.decode())
     # Get all the info belonging to a user
