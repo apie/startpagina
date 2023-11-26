@@ -2,15 +2,23 @@
 # Parse Caspars Aoc webpage for our leaderboard. Output the unsolved puzzles for a user + year.
 # By Apie 2023
 from sys import argv
-import urllib.request
 from lxml import html
+from cache import ttl_lru_cache
+
+import requests_cache
+
+urls_expire_after = {
+    '*': 60*60,
+}
+session = requests_cache.CachedSession('aoc_cache', urls_expire_after=urls_expire_after)
 
 URL = "https://caspar.verhey.net/AoC/?year={year}"
 
+@ttl_lru_cache(60*30)
 def get_open_days(username, year):
-    response = urllib.request.urlopen(URL.format(year=year))
-    r = response.read()
-    h = html.fromstring(r.decode())
+    response = session.get(URL.format(year=year))
+    response.raise_for_status()
+    h = html.fromstring(response.content)
     # Get all the info belonging to a user
     d = h.xpath(f'//span[@class="name"]/a[text()="{username}"]/../..')[0]
     t = d.text_content().splitlines()
@@ -27,6 +35,12 @@ def get_open_days(username, year):
         if d.startswith('day') and p.endswith("-")
     ]
 
+async def get_all_open_days_for_user(username):
+    retval = []
+    for year in range(2015, 2023+1):
+        open_days = get_open_days(username, year)
+        retval.append({'year': year, 'num_open_days': len(open_days)})
+    return retval
 
 if __name__ == "__main__":
     username = argv[1]

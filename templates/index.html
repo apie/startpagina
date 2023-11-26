@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Startpagina</title>
+    </head>
+    <body>
+        <main>
+            <section>
+                <h1>Advent of code</h1>
+                <ul>
+                {% for aoc in aocs %}
+                    <li>
+                        <a target="_blank" href="https://adventofcode.com/{{ aoc.year }}/">{{ aoc.year }}</a> &mdash; {{ aoc.num_open_days }} te doen
+                        <!-- todo link -->
+                    </li>
+                {% endfor %}
+                </ul>
+            </section>
+            <section>
+                <h1>Series</h1>
+                <ul>
+                {% for show in shows %}
+                    <li>
+                        <a target="_blank" href="https://www.tvmaze.com/watchlist">{{ show.name }}</a> &mdash; {{ show.num_acquired }} te kijken
+                        <!-- todo link -->
+                    </li>
+                {% endfor %}
+                </ul>
+            </section>
+        </main>
+    </body>
+</html>

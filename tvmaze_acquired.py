@@ -4,6 +4,8 @@ from sys import argv
 import requests
 import requests_cache
 
+from cache import ttl_lru_cache
+
 import settings as config
 
 TVMAZE_BASE_URL = "https://api.tvmaze.com/v1"
@@ -24,6 +26,7 @@ session = requests_cache.CachedSession('tvmaze_cache', urls_expire_after=urls_ex
 #aanname dat je op volgorde dingen op watched zet
 #volledig gezien = show_ended and previous_episode in watched_episodes 
 
+@ttl_lru_cache(60*60)
 def get_followed_shows():
     response = session.get(FOLLOWED_SHOWS_PAGE, timeout=5, auth=(config.TVMAZE_USER_NAME, config.TVMAZE_API_KEY))
     response.raise_for_status()
@@ -36,6 +39,7 @@ def get_followed_shows():
         for s in response.json()
     ]
 
+@ttl_lru_cache(60*60)
 def get_acquired_eps(show_id):
     response = session.get(EP_ACQUIRED_PAGE.format(show_id=show_id), timeout=5, auth=(config.TVMAZE_USER_NAME, config.TVMAZE_API_KEY))
     response.raise_for_status()
