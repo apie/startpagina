@@ -1,0 +1,17 @@
+[Unit]
+Description=Startpagina
+After=syslog.target
+
+[Service]
+Type=simple
+User=denick
+Group=denick
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/home/denick/startpagina/
+ExecStart=/home/denick/startpagina/start.bash
+ExecReload=/usr/bin/pkill -HUP -f 'startpagina/venv/bin/hypercorn'
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
