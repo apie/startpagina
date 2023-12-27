@@ -9,7 +9,7 @@ app = Quart(__name__)
 
 async def tvmaze():
     retval = []
-    for show in sorted(get_followed_shows(), key=lambda s: s['status']):
+    for show in sorted(get_followed_shows(), key=lambda s: s['name']):
         if acquired_eps := get_acquired_eps(show['show_id']):
             retval.append({'name': show["name"], 'status': show["status"], 'num_acquired': len(acquired_eps)})
     return retval
