@@ -2,4 +2,7 @@ todo.txt
 *.pyc
 settings.py
 *.sqlite
+venv/
+.git/
+deploy.bash
 
