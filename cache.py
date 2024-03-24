@@ -16,4 +16,3 @@ def ttl_lru_cache(seconds_to_live: int, maxsize: int = 128):
             return func(*args, **kwargs)
         return lambda *args, **kwargs: inner(time.monotonic() // seconds_to_live, *args, **kwargs)
     return wrapper
-

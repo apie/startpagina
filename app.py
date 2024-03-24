@@ -14,6 +14,7 @@ async def tvmaze():
             retval.append({'name': show["name"], 'status': show["status"], 'num_acquired': len(acquired_eps)})
     return retval
 
+
 @app.route('/')
 async def index():
     shows = await tvmaze()

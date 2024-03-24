@@ -8,13 +8,14 @@ from cache import ttl_lru_cache
 import requests_cache
 
 urls_expire_after = {
-    '*': 60*60,
+    '*': 60 * 60,
 }
 session = requests_cache.CachedSession('aoc_cache', urls_expire_after=urls_expire_after)
 
 URL = "https://caspar.verhey.net/AoC/?year={year}"
 
-@ttl_lru_cache(60*30)
+
+@ttl_lru_cache(60 * 30)
 def get_open_days(username, year):
     response = session.get(URL.format(year=year))
     response.raise_for_status()
@@ -35,9 +36,10 @@ def get_open_days(username, year):
         if d.startswith('day') and p.endswith("-")
     ]
 
+
 async def get_all_open_days_for_user(username):
     retval = []
-    for year in range(2015, 2023+1):
+    for year in range(2015, 2023 + 1):
         open_days = get_open_days(username, year)
         retval.append({'year': year, 'num_open_days': len(open_days)})
     return retval
@@ -48,4 +50,3 @@ if __name__ == "__main__":
     open_days = get_open_days(username, year)
     print(len(open_days))
     print(open_days)
-
