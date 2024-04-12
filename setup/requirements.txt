@@ -42,7 +42,7 @@ hypercorn==0.15.0
     # via quart
 hyperframe==6.0.1
     # via h2
-idna==3.4
+idna==3.7
     # via requests
 itsdangerous==2.1.2
     # via
