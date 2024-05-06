@@ -83,7 +83,7 @@ urllib3==2.0.7
     # via
     #   requests
     #   requests-cache
-werkzeug==3.0.1
+werkzeug==3.0.3
     # via
     #   flask
     #   quart
