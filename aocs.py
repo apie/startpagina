@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # Parse Caspars Aoc webpage for our leaderboard. Output the unsolved puzzles for a user + year.
 # By Apie 2023
+import asyncio
+from datetime import date
 from sys import argv
 from lxml import html
 from cache import ttl_lru_cache
@@ -15,8 +17,7 @@ session = requests_cache.CachedSession('aoc_cache', urls_expire_after=urls_expir
 URL = "https://caspar.verhey.net/AoC/?year={year}"
 
 
-@ttl_lru_cache(60 * 30)
-def get_open_days(username, year):
+async def get_open_days(username, year):
     response = session.get(URL.format(year=year))
     response.raise_for_status()
     h = html.fromstring(response.content)
@@ -37,16 +38,41 @@ def get_open_days(username, year):
     ]
 
 
+@ttl_lru_cache(600)
+def get_today():
+    return date.today()
+
+
 async def get_all_open_days_for_user(username):
-    retval = []
-    for year in range(2015, 2023 + 1):
-        open_days = get_open_days(username, year)
-        retval.append({'year': year, 'num_open_days': len(open_days)})
-    return retval
+    start_year = 2015
+    today = get_today()
+    end_year = today.year if today.month == 12 else today.year - 1
+    tasks = (
+        get_open_days(username, year)
+        for year in range(start_year, end_year + 1)
+    )
+    results = await asyncio.gather(*tasks)  # gathered in order
+    return [
+        dict(
+            year=start_year + i,
+            num_open_days=len(open_days),
+        )
+        for i, open_days in enumerate(results)
+    ]
+
+
+async def main():
+    username = argv[1]
+    year = argv[2] if len(argv) == 3 else None
+    if year:
+        open_days = await get_open_days(username, year)
+        print(len(open_days))
+        print(open_days)
+    else:
+        open_days = await get_all_open_days_for_user(username)
+        for y in open_days:
+            print(y)
+
 
 if __name__ == "__main__":
-    username = argv[1]
-    year = argv[2]
-    open_days = get_open_days(username, year)
-    print(len(open_days))
-    print(open_days)
+    asyncio.run(main())
