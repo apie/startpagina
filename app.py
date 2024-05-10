@@ -2,6 +2,7 @@ from quart import Quart, render_template
 
 from tvmaze_acquired import get_followed_shows, get_acquired_eps
 from aocs import get_all_open_days_for_user
+from teverzamelen import get_reading_list
 
 
 app = Quart(__name__)
@@ -19,7 +20,8 @@ async def tvmaze():
 async def index():
     shows = await tvmaze()
     aocs = await get_all_open_days_for_user('apie')
-    return await render_template("index.html", shows=shows, aocs=aocs)
+    reading_list = get_reading_list()
+    return await render_template("index.html", shows=shows, aocs=aocs, reading_list=reading_list)
 
 
 app.run()

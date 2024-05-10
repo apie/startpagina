@@ -9,6 +9,12 @@
     <body>
         <main>
             <section>
+                <h2>Teverzamelen</h2>
+                <p>
+                    <a target="_blank" href="https://www.teverzamelen.nl/reading_list">{{ reading_list.user.capitalize() }}</a> moet nog {{ reading_list.num_to_read }} lezen en is met {{ reading_list.num_busy_reading }} bezig.
+                </p>
+            </section>
+            <section>
                 <h2>Advent of code</h2>
                 <ul>
                 {% for aoc in aocs %}
