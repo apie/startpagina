@@ -1,3 +1,3 @@
 #!/bin/bash
 source venv/bin/activate
-quart run --reload
+FLASK_DEBUG=1 quart run --reload
