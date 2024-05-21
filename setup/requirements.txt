@@ -65,7 +65,7 @@ priority==2.0.0
     # via hypercorn
 quart==0.19.5
     # via -r requirements.in
-requests==2.31.0
+requests==2.32.0
     # via requests-cache
 requests-cache==1.2.0
     # via -r requirements.in
