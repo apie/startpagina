@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Parse Caspars Aoc webpage for our leaderboard. Output the unsolved puzzles for a user + year.
+# Parse Aoc webpage for our leaderboard. Output the unsolved puzzles for a user + year.
 # By Apie 2023
 import asyncio
 from datetime import date
@@ -14,7 +14,8 @@ urls_expire_after = {
 }
 session = requests_cache.CachedSession('aoc_cache', urls_expire_after=urls_expire_after)
 
-URL = "https://caspar.verhey.net/AoC/?year={year}"
+BASE_URL = "https://d87.nl/aoc/scintilla"
+URL = BASE_URL + "?year={year}"
 
 
 async def get_open_days(username, year):
