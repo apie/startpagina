@@ -10,7 +10,7 @@ from cache import ttl_lru_cache
 import requests_cache
 
 urls_expire_after = {
-    "*": 60 * 60,
+    "*": 60 * 60 * 24,
 }
 session = requests_cache.CachedSession("aoc_cache", urls_expire_after=urls_expire_after)
 
