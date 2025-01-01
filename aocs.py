@@ -19,7 +19,7 @@ URL = BASE_URL + "?year={year}"
 
 
 async def get_open_days(username, year):
-    response = session.get(URL.format(year=year))
+    response = session.get(URL.format(year=year), timeout=10)
     response.raise_for_status()
     h = html.fromstring(response.content)
     # Get all the info belonging to a user
@@ -60,7 +60,7 @@ async def get_all_open_days_for_user(username):
 
 
 async def get_available_usernames():
-    response = session.get(URL.format(year=2015))
+    response = session.get(URL.format(year=2015), timeout=10)
     response.raise_for_status()
     h = html.fromstring(response.content)
     name_els = h.xpath('//span[@class="name"]/a')
