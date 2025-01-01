@@ -59,7 +59,20 @@ async def get_all_open_days_for_user(username):
     ]
 
 
+async def get_available_usernames():
+    response = session.get(URL.format(year=2015))
+    response.raise_for_status()
+    h = html.fromstring(response.content)
+    name_els = h.xpath('//span[@class="name"]/a')
+    return [name_el.text_content() for name_el in name_els]
+
+
 async def main():
+    if len(argv) == 1:
+        print("== Available usernames ==")
+        for uname in await get_available_usernames():
+            print(uname)
+        return
     username = argv[1]
     year = argv[2] if len(argv) == 3 else None
     if year:
