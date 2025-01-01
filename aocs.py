@@ -10,9 +10,9 @@ from cache import ttl_lru_cache
 import requests_cache
 
 urls_expire_after = {
-    '*': 60 * 60,
+    "*": 60 * 60,
 }
-session = requests_cache.CachedSession('aoc_cache', urls_expire_after=urls_expire_after)
+session = requests_cache.CachedSession("aoc_cache", urls_expire_after=urls_expire_after)
 
 BASE_URL = "https://d87.nl/aoc/scintilla"
 URL = BASE_URL + "?year={year}"
@@ -35,7 +35,7 @@ async def get_open_days(username, year):
         # split day in parts
         for ip, p in enumerate(d.split("/"), start=1)
         # ending with a dash means it is unsolved
-        if d.startswith('day') and p.endswith("-")
+        if d.startswith("day") and p.endswith("-")
     ]
 
 
@@ -48,10 +48,7 @@ async def get_all_open_days_for_user(username):
     start_year = 2015
     today = get_today()
     end_year = today.year if today.month == 12 else today.year - 1
-    tasks = (
-        get_open_days(username, year)
-        for year in range(start_year, end_year + 1)
-    )
+    tasks = (get_open_days(username, year) for year in range(start_year, end_year + 1))
     results = await asyncio.gather(*tasks)  # gathered in order
     return [
         dict(
