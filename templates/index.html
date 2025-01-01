@@ -25,6 +25,16 @@
                 </ul>
             </section>
             <section>
+                <h2>Debug December</h2>
+                <ul>
+                {% for dbd in debugdecembers %}
+                    <li>
+                        <a target="_blank" href="https://www.debugdecember.com/challenges/{{ dbd.year }}/">{{ dbd.year }}</a> &mdash; {{ dbd.num_open_days }} te doen
+                    </li>
+                {% endfor %}
+                </ul>
+            </section>
+            <section>
                 <h2>Series</h2>
                 <ul>
                 {% for show in shows %}
