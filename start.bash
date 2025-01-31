@@ -6,7 +6,7 @@ if [ ! -f 'app.py' ]; then
   exit 1
 fi
 if [ ! -d "venv" ]; then
-  virtualenv --python=python3.10 venv
+  virtualenv --python=python3.12 venv
 fi
 source venv/bin/activate
 pip3 install pip==23.3.1 pip-tools==7.3.0
