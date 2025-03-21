@@ -4,6 +4,7 @@ import asyncio
 from datetime import date
 from cache import ttl_lru_cache
 
+from requests.exceptions import HTTPError
 import requests_cache
 
 from settings import DEBUGDECEMBER_TOKEN
@@ -25,7 +26,11 @@ headers = {
 
 async def get_open_days(year):
     response = session.get(URL.format(year=year), headers=headers, timeout=10)
-    response.raise_for_status()
+    try:
+        response.raise_for_status()
+    except HTTPError as e:
+        print("Got error while requesting open days:", e)
+        return ["x"] * 999
     data = response.json()
     return [day["day"] for day in data if day["solvedAt"] is None]
 
