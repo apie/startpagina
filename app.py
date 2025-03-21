@@ -32,12 +32,20 @@ async def index():
     aocs = await get_all_open_days_for_user(AOC_NAME)
     debugdecembers = await get_all_open_days_for_user_debugdecember()
     reading_list = get_reading_list()
+    total = dict(
+        shows=sum(s["num_acquired"] for s in shows),
+        aocs=sum(y["num_open_days"] for y in aocs),
+        debugdecembers=sum(y["num_open_days"] for y in debugdecembers),
+        reading_list=reading_list["num_to_read"],
+    )
+    total["grand"] = sum(total.values())
     return await render_template(
         "index.html",
         shows=shows,
         aocs=aocs,
         debugdecembers=debugdecembers,
         reading_list=reading_list,
+        total=total,
     )
 
 

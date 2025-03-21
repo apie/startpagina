@@ -9,6 +9,12 @@
     <body>
         <main>
             <section>
+                <h1>Totaal</h1>
+                <p>
+                    Nog {{ total.grand }} dingen te doen.
+                </p>
+            </section>
+            <section>
                 <h2>Teverzamelen</h2>
                 <p>
                     <a target="_blank" href="https://www.teverzamelen.nl/reading_list">{{ reading_list.user.capitalize() }}</a> moet nog {{ reading_list.num_to_read }} lezen en is met {{ reading_list.num_busy_reading }} bezig.
@@ -17,33 +23,36 @@
             <section>
                 <h2>Advent of code</h2>
                 <ul>
-                {% for aoc in aocs %}
-                    <li>
-                        <a target="_blank" href="https://adventofcode.com/{{ aoc.year }}/">{{ aoc.year }}</a> &mdash; {{ aoc.num_open_days }} te doen
-                    </li>
-                {% endfor %}
+                    {% for aoc in aocs %}
+                        <li>
+                            <a target="_blank" href="https://adventofcode.com/{{ aoc.year }}/">{{ aoc.year }}</a> &mdash; {{ aoc.num_open_days }} te doen
+                        </li>
+                    {% endfor %}
                 </ul>
+                Totaal: {{ total.aocs }}
             </section>
             <section>
                 <h2>Debug December</h2>
                 <ul>
-                {% for dbd in debugdecembers %}
-                    <li>
-                        <a target="_blank" href="https://www.debugdecember.com/challenges/{{ dbd.year }}/">{{ dbd.year }}</a> &mdash; {{ dbd.num_open_days }} te doen
-                    </li>
-                {% endfor %}
+                    {% for dbd in debugdecembers %}
+                        <li>
+                            <a target="_blank" href="https://www.debugdecember.com/challenges/{{ dbd.year }}/">{{ dbd.year }}</a> &mdash; {{ dbd.num_open_days }} te doen
+                        </li>
+                    {% endfor %}
                 </ul>
+                Totaal: {{ total.debugdecembers }}
             </section>
             <section>
                 <h2>Series</h2>
                 <ul>
-                {% for show in shows %}
-                    <li>
-                        <a target="_blank" href="https://www.tvmaze.com/watchlist">{{ show.name }}</a> &mdash; {{ show.num_acquired }} te kijken
-                        <!-- todo link -->
-                    </li>
-                {% endfor %}
+                    {% for show in shows %}
+                        <li>
+                            <a target="_blank" href="https://www.tvmaze.com/watchlist">{{ show.name }}</a> &mdash; {{ show.num_acquired }} te kijken
+                            <!-- todo link -->
+                        </li>
+                    {% endfor %}
                 </ul>
+                Totaal: {{ total.shows }}
             </section>
         </main>
     </body>
