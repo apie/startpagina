@@ -24,7 +24,7 @@ click==8.1.8
     # via
     #   flask
     #   quart
-flask==3.1.0
+flask==3.1.1
     # via quart
 h11==0.16.0
     # via
@@ -52,6 +52,7 @@ lxml==5.3.0
     # via -r requirements.in
 markupsafe==3.0.2
     # via
+    #   flask
     #   jinja2
     #   quart
     #   werkzeug
