@@ -70,7 +70,7 @@ six==1.17.0
     # via url-normalize
 url-normalize==1.4.3
     # via requests-cache
-urllib3==2.3.0
+urllib3==2.5.0
     # via
     #   requests
     #   requests-cache
