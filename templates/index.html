@@ -47,7 +47,7 @@
                     <ul>
                         {% for dbd in debugdecembers %}
                             <li>
-                                <a target="_blank" href="https://www.debugdecember.com/challenges/{{ dbd.year }}/">{{ dbd.year }}</a> &mdash; {{ dbd.num_open_days }} te doen
+                                <a target="_blank" href="https://www.debugdecember.com/challenges/{{ dbd.year }}/">{{ dbd.year }}</a> &mdash; {% if dbd.num_open_days %}{{ dbd.num_open_days }} te doen{% else %}Compleet{% endif %}
                             </li>
                         {% endfor %}
                     </ul>
