@@ -54,6 +54,7 @@ async def get_all_open_days_for_user(username):
         dict(
             year=start_year + i,
             num_open_days=len(open_days),
+            num_half_open_days=len([day for day, part_todo in open_days if part_todo == 2]),
         )
         for i, open_days in enumerate(results)
     ]
