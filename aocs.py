@@ -23,8 +23,8 @@ async def get_open_days(username, year):
     response.raise_for_status()
     h = html.fromstring(response.content)
     # Get all the info belonging to a user
-    d = h.xpath(f'//span[@class="name"]/a[text()="{username}"]/../..')[0]
-    t = d.text_content().splitlines()
+    days = h.xpath(f'//span[@class="name"]/a[text()="{username}"]/../..') or h.xpath(f'//span[@class="name"][text()="{username}"]/..')
+    t = days[0].text_content().splitlines()
     # Returns list of tuples: day, part
     # The list contains only the days and parts that are unsolved. If a day is completely unsolved it contains only part 1, since that need to be solved before part 2.
     return [
@@ -64,7 +64,7 @@ async def get_available_usernames():
     response = session.get(URL.format(year=2015), timeout=10)
     response.raise_for_status()
     h = html.fromstring(response.content)
-    name_els = h.xpath('//span[@class="name"]/a')
+    name_els = h.xpath('//span[@class="name"]')
     return [name_el.text_content() for name_el in name_els]
 
 
