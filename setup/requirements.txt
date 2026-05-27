@@ -30,7 +30,7 @@ h11==0.16.0
     # via
     #   hypercorn
     #   wsproto
-h2==4.1.0
+h2==4.3.0
     # via hypercorn
 hpack==4.1.0
     # via h2
