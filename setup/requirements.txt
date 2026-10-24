@@ -16,7 +16,7 @@ blinker==1.9.0
     #   quart
 cattrs==24.1.2
     # via requests-cache
-certifi==2025.1.31
+certifi==2026.10.19
     # via requests
 charset-normalizer==3.4.1
     # via requests
