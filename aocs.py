@@ -14,7 +14,7 @@ urls_expire_after = {
 }
 session = requests_cache.CachedSession("aoc_cache", urls_expire_after=urls_expire_after)
 
-BASE_URL = "https://d87.nl/aoc/scintilla"
+BASE_URL = "https://vps3.stad.gr/aoc/scintilla"
 URL = BASE_URL + "?year={year}"
 
 
